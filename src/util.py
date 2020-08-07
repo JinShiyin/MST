@@ -7,7 +7,7 @@ def get_filename(path):
 
 
 def extract_image_names_recursive(top):
-    img_exts = ['.jpg', '.jpeg', '.png']
+    img_exts = ['.jpg', '.jpeg', '.png', '.bmp']
     return [os.path.join(dirpath, filename)
         for dirpath, _, filenames in os.walk(top)
         for filename in filenames if os.path.splitext(filename)[1] in img_exts]
