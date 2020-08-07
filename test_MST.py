@@ -27,7 +27,7 @@ def style_transfer(
         crop=None,
         alpha=1.0,
         output_dir='output',
-        save_ext='jpg',
+        save_ext='bmp',
         gpu=0,
         vgg_weights='models/vgg19_weights_normalized.h5',
         decoder_weights='models/ckp-MST-paper',
@@ -84,6 +84,7 @@ def style_transfer(
 
             style_image = prepare_image(style_image)
             content_image = prepare_image(content_image)
+            print(f'content_name={content_name}, style_name={style_name}')
             style_feature = sess.run(encoder, feed_dict={
                 image: style_image[np.newaxis,:]
             })
@@ -141,7 +142,7 @@ def style_transfer(
                 target: target_feature
             })
 
-            filename = '%s_stylized_%s.%s' % (content_name, style_name, save_ext)
+            filename = '%s_%s.%s' % (content_name, style_name, save_ext)
             filename = os.path.join(output_dir, filename)
             save_image(filename, output[0], data_format=data_format)
             print('Output image saved at', filename)
